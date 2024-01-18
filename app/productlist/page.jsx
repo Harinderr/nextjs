@@ -1,32 +1,30 @@
-"use client";
-import { useEffect, useState } from "react";
-export default function ProductList() {
-  const [products, setproducts] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const apidata = await fetch(
-          "https://hub.dummyapis.com/products?noofRecords=10&idStarts=1001&currency=usd"
-        );
-        const data = await apidata.json();
+import Product from "./Product";
 
-        setproducts(data);
-    
-      } catch (err) {
-        console.log("there is an error" + err);
-      }
-    }
-    fetchData();
-  }, []);
-  
+async function productList() {
+  const apidata = await fetch(
+    "https://hub.dummyapis.com/products?noofRecords=10&idStarts=1001&currency=usd"
+  );
+  const data = await apidata.json();
+
+  return data;
+}
+
+export default async function Page() {
+  const data = await productList();
+
   return (
-    <main>
-      <h1> This is the product list</h1>
-      {products.map((val,index) => {
-       
-        return (  <h2 key={index}>{val.name } {'  '} {val.price}</h2>)
-       
-      })}
-    </main>
+    <div>
+     
+        Product List is here
+        {data.map((item, index) => {
+          return (
+       <>
+        <h3 key={index}>{item.name}</h3>
+         <Product price = {item.price}></Product>
+          </>  
+          )
+        })}
+      
+    </div>
   );
 }
