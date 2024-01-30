@@ -1,8 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images : {
-        domains : ['unsplash.com']
-    }
-}
+  images: {
+    domains: ["unsplash.com"],
+  },
+  redirects: async () => {
+    return [
+      {
+        source: "/users",
+        destination: "/",
+        permanent: false,
+      },
 
-module.exports = nextConfig
+      {
+        source: "/users/:userid",
+        destination: "/",
+        permanent: false,
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;

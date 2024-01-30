@@ -14,17 +14,19 @@ export default async function Page() {
 
   return (
     <div>
-     
-        Product List is here
-        {data.map((item, index) => {
-          return (
-       <>
-        <h3 key={index}>{item.name}</h3>
-         <Product price = {item.price}></Product>
-          </>  
-          )
-        })}
-      
+      Product List is here
+      {data.map((item, index) => {
+        return (
+          <>
+            <h3 key={index}>{item.name}</h3>
+            <Product price={item.price}></Product>
+          </>
+        );
+      })}
     </div>
   );
+}
+
+export function generateMetadata() {
+  return { title: "api product list", description: "products under 100rs" };
 }
